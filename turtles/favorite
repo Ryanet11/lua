@@ -1,0 +1,11 @@
+{
+  tunnels_separation = 0,
+  tunnels_integer = 1,
+  throw_stuff = true,
+  Torch_approval = false,
+  Width = 1,
+  Chest_approval = false,
+  Height = 3,
+  Length = 1,
+  enderchest = false,
+}
