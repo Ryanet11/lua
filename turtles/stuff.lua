@@ -7,10 +7,17 @@ ignore = {
     ["diamondglass:diamond_sand"] = true
 }
 moves = {}
+function refuel1() 
+    if turtle.getFuelLevel() <= 50 then 
+        turtle.select(16)
+        turtle.refuel(1)
+        turtle.select(1)
+    end
+end
 function refuel() 
     if turtle.getItemCount(16) <= 5 then
         returnBase()
-    if turtle.getFuelLevel() <= 50 then 
+    elseif turtle.getFuelLevel() <= 50 then 
         turtle.select(16)
         turtle.refuel(1)
         turtle.select(1)
@@ -99,7 +106,7 @@ function moveUp()
     if inventoryFull() then
         returnBase()
     else
-        turtle.dig()
+        turtle.digUp()
         table.insert(moves, 4)
         turtle.up()
     end
@@ -109,12 +116,33 @@ function moveDown()
     if inventoryFull() then
         returnBase()
     else
-        turtle.dig()
+        turtle.digDown()
         table.insert(moves, 4)
         turtle.down()
     end
 end
-
+function returnBase()
+    tableLength = #moves
+    for i=tableLength,1,-1 do 
+        if moves[i] == 1 then
+            refeul1()
+            turtle.backwards()
+        elseif moves[i] == 2 then
+            turtle.right()
+        elseif moves[i] == 3 then
+            turtle.left()
+        elseif moves[i] == 4 then
+            refeul1()
+            turtle.down()
+        elseif moves[i] == 5 then
+            refeul1()
+            turtle.up()
+        end
+    end
+    for k in pairs (moves) do
+        moves[k] = nil
+    end
+end
 --[[1 is forward
 2 is left
 3 is right
